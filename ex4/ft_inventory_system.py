@@ -40,6 +40,7 @@ def make_dict(args: list[str]) -> dict[str, int]:
 
 
 def update_inventory(inventory: dict[str, int], item_added: str) -> None:
+
     parts = item_added.split(":")
     quantity = validate(item_added)
 

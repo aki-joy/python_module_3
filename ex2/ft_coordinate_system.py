@@ -15,19 +15,23 @@ def get_player_pos() -> tuple[float, float, float]:
 
         try:
             x = float(x_raw)
-            y = float(y_raw)
-            z = float(z_raw)
-            return (x, y, z)
         except Exception as e:
-            invalid_param = x_raw
-            try:
-                float(x_raw)
-                invalid_param = y_raw
-                float(y_raw)
-                invalid_param = z_raw
-            except Exception:
-                pass
-            print(f"Error on parameter '{invalid_param}': {e}")
+            print(f"Error on parameter '{x_raw}': {e}")
+            continue
+
+        try:
+            y = float(y_raw)
+        except Exception as e:
+            print(f"Error on parameter '{y_raw}': {e}")
+            continue
+
+        try:
+            z = float(z_raw)
+        except Exception as e:
+            print(f"Error on parameter '{z_raw}': {e}")
+            continue
+
+        return (x, y, z)
 
 
 def calculate(
