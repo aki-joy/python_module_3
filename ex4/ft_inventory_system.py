@@ -40,18 +40,15 @@ def make_dict(args: list[str]) -> dict[str, int]:
 
 
 def update_inventory(
-            inventory: dict[str, int],
-            added_items: list[str],
+        inventory: dict[str, int],
+        added_item: list[str]
         ) -> None:
-    for added_item in added_items:
-        parts = added_item.split(":")
-        quantity = validate(added_item)
 
-        if quantity == -1:
-            continue
+    parts = added_item.split(":")
+    quantity = validate(added_item)
 
-        item = parts[0]
-        inventory[item] = quantity
+    item = parts[0]
+    inventory[item] = quantity
 
     print(f"Updated inventory: {inventory}")
 
