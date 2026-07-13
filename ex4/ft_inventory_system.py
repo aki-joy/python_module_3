@@ -39,17 +39,20 @@ def make_dict(args: list[str]) -> dict[str, int]:
     return inventory
 
 
-def update_inventory(inventory: dict[str, int], item_added: str) -> None:
+def update_inventory(
+            inventory: dict[str, int],
+            added_items: list[str],
+        ) -> None:
+    for added_item in added_items:
+        parts = added_item.split(":")
+        quantity = validate(added_item)
 
-    parts = item_added.split(":")
-    quantity = validate(item_added)
+        if quantity == -1:
+            continue
 
-    if quantity == -1:
-        return
+        item = parts[0]
+        inventory[item] = quantity
 
-    item = parts[0]
-
-    inventory.update({item: quantity})
     print(f"Updated inventory: {inventory}")
 
 
@@ -65,7 +68,7 @@ def inventory_system(args: list[str]) -> None:
     print(f"Total quantity of the {len(values)} items: {total_quantity}")
 
     if len(keys) < 1:
-        update_inventory(inventory, "magic_item:1")
+        update_inventory(inventory, ["magic_item:1"])
         return
 
     for key in keys:
@@ -90,7 +93,7 @@ def inventory_system(args: list[str]) -> None:
         f"with quantity {inventory[least_item]}"
     )
 
-    update_inventory(inventory, "magic_item:1")
+    update_inventory(inventory, ["magic_item:1"])
 
 
 if __name__ == "__main__":

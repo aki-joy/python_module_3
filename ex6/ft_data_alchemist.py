@@ -8,9 +8,9 @@ PLAYERS = [
 
 
 def data_alchemist(players: list[str]) -> None:
-    all_capitalized: list[str] = []
-    capitalized_only: list[str] = []
-    name_with_score: dict[str, int] = {}
+    # all_capitalized: list[str] = []
+    # capitalized_only: list[str] = []
+    # name_with_score: dict[str, int] = {}
 
     all_capitalized = [player.capitalize() for player in players]
 

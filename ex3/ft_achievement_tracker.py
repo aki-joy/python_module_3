@@ -12,11 +12,13 @@ ACHIEVEMENTS = [
 
 
 def gen_player_achievements(achievements: list[str]) -> set[str]:
+
     amount = random.randint(7, 15)
     return set(random.sample(achievements, amount))
 
 
 def achievement_tracker() -> None:
+
     alice = gen_player_achievements(ACHIEVEMENTS)
     bob = gen_player_achievements(ACHIEVEMENTS)
     charlie = gen_player_achievements(ACHIEVEMENTS)
