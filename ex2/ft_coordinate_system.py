@@ -5,17 +5,29 @@ def get_player_pos() -> tuple[float, float, float]:
 
     while True:
         try:
-            coordinates = input(
+            raw_coordinates = input(
                 "Enter new coordinates as floats in format 'x,y,z': "
-            ).split(",")
-            if len(coordinates) < 2:
-                raise Exception("Invalid syntax")
-            x = float(coordinates[0])
-            y = float(coordinates[1])
-            z = float(coordinates[2])
+            )
+            x_raw, y_raw, z_raw = raw_coordinates.split(",")
+        except Exception:
+            print("Invalid syntax")
+            continue
+
+        try:
+            x = float(x_raw)
+            y = float(y_raw)
+            z = float(z_raw)
             return (x, y, z)
         except Exception as e:
-            print(f"{e}")
+            invalid_param = x_raw
+            try:
+                float(x_raw)
+                invalid_param = y_raw
+                float(y_raw)
+                invalid_param = z_raw
+            except Exception:
+                pass
+            print(f"Error on parameter '{invalid_param}': {e}")
 
 
 def calculate(
@@ -32,30 +44,25 @@ def calculate(
     return distance
 
 
-def show(number: str, pos: tuple[float, float, float]) -> None:
-
-    print(f"Get a {number} set of coordinates")
-    print(f"Got a {number} tuple: {pos}")
-    print(f"It includes: X={pos[0]}, Y={pos[1]}, Z={pos[2]}")
-
-
 def coordinate_system() -> None:
 
     origin = (0.0, 0.0, 0.0)
 
+    print("Get a first set of coordinates")
     first_pos = get_player_pos()
-    show("first", first_pos)
+    print(f"Got a first tuple: {first_pos}")
+    print(f"It includes: X={first_pos[0]}, Y={first_pos[1]}, Z={first_pos[2]}")
 
     distance_to_center = calculate(origin, first_pos)
     print(f"Distance to center: {distance_to_center}\n")
 
+    print("Get a second set of coordinates")
     second_pos = get_player_pos()
-    show("second", second_pos)
 
     distance_two_points = calculate(first_pos, second_pos)
     print(f"Distance between the 2 sets of coordinates: {distance_two_points}")
 
 
 if __name__ == "__main__":
-    print("=== Game Coordinates System ===")
+    print("=== Game Coordinate System ===")
     coordinate_system()

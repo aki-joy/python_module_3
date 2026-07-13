@@ -1,14 +1,14 @@
 import sys
 
 
-def analyse_scores(args: list[str]):
+def analyse_scores(args: list[str]) -> None:
     scores: list[int] = []
-    for i in range(1, len(args)):
+    for arg in args[1:]:
         try:
-            scores.append(int(args[i]))
+            scores.append(int(arg))
 
-        except Exception as e:
-            print(f"{e}")
+        except Exception:
+            print(f"Invalid parameter: '{arg}'")
 
     if len(scores) < 1:
         print(
@@ -17,7 +17,7 @@ def analyse_scores(args: list[str]):
         )
     else:
         print(f"Scores processed: {scores}")
-        print(f"Total player: {len(scores)}")
+        print(f"Total players: {len(scores)}")
         print(f"Total score: {sum(scores)}")
         print(f"Average score: {sum(scores) / (len(scores))}")
         print(f"High score: {max(scores)}")

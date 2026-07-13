@@ -7,55 +7,44 @@ ACHIEVEMENTS = [
     "Dragon Vanquisher", "Monster Hunter", "Dungeon Conqueror",
     "World Savior", "Speed Runner", "Untouchable", "Unstoppable",
     "Perfect Victory", "Last Stand", "Survivor", "Sharp Mind",
-    "Strategist", "Puzzle Master", "Silent Assassin",
-    "Crafting Genius", "Master Blacksmith", "Potion Expert",
-    "Collector Supreme", "Rare Item Finder", "Legendary Collector",
-    "Gold Hoarder", "Millionaire Hero", "Arena Champion",
-    "Battle Veteran", "Combo Master", "Critical Striker",
-    "Flawless Defender", "Team Leader", "Loyal Companion",
-    "Quest Specialist", "Side Quest Hero", "Map Completionist",
-    "Secret Unlocker", "Legend Awakened"
+    "Strategist", "Puzzle Master", "Silent Assassin"
     ]
 
 
-def gen_player_achievements(achievements: list[str]) -> None:
-    Alice = set()
-    Bob = set()
-    Charlie = set()
-    Dylan = set()
+def gen_player_achievements(achievements: list[str]) -> set[str]:
+    amount = random.randint(7, 15)
+    return set(random.sample(achievements, amount))
 
-    names = ["Alice", "Bob", "Charlie", "Dylan"]
-    players = [Alice, Bob, Charlie, Dylan]
 
-    for i in range(len(players)):
+def achievement_tracker() -> None:
+    alice = gen_player_achievements(ACHIEVEMENTS)
+    bob = gen_player_achievements(ACHIEVEMENTS)
+    charlie = gen_player_achievements(ACHIEVEMENTS)
+    dylan = gen_player_achievements(ACHIEVEMENTS)
 
-        players[i] = set(random.sample(achievements, random.randint(7, 15)))
-        print(f"Player {names[i]}: {players[i]}\n")
+    print(f"Player Alice: {alice}\n")
+    print(f"Player Bob: {bob}\n")
+    print(f"Player Charlie: {charlie}\n")
+    print(f"Player Dylan: {dylan}\n")
 
-    all_distinct = Alice.union(Bob, Charlie, Dylan)
+    all_distinct = alice.union(bob, charlie, dylan)
     print(f"All distinct achievements: {all_distinct}\n")
 
-    common = Alice.intersection(Bob, Charlie, Dylan)
+    common = alice.intersection(bob, charlie, dylan)
     print(f"Common achievements: {common}\n")
 
-    for i in range(len(players)):
+    print(f"Only Alice has: {alice.difference(bob, charlie, dylan)}\n")
+    print(f"Only Bob has: {bob.difference(alice, charlie, dylan)}\n")
+    print(f"Only Charlie has: {charlie.difference(alice, bob, dylan)}\n")
+    print(f"Only Dylan has: {dylan.difference(alice, bob, charlie)}\n")
 
-        others = []
-
-        for j in range(len(players)):
-
-            if j != i:
-                others.append(players[j])
-                only = players[i].difference(*others)
-
-        print(f"Only {names[i]} has: {only}\n")
-
-    for i in range(len(players)):
-
-        missing = set(ACHIEVEMENTS).difference(players[i])
-        print(f"{names[i]} is missing: {missing}\n")
+    all_achievements = set(ACHIEVEMENTS)
+    print(f"Alice is missing: {all_achievements.difference(alice)}\n")
+    print(f"Bob is missing: {all_achievements.difference(bob)}\n")
+    print(f"Charlie is missing: {all_achievements.difference(charlie)}\n")
+    print(f"Dylan is missing: {all_achievements.difference(dylan)}\n")
 
 
 if __name__ == "__main__":
     print("=== Achievement Tracker System ===")
-    gen_player_achievements(ACHIEVEMENTS)
+    achievement_tracker()
