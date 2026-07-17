@@ -93,7 +93,7 @@ def inventory_system(args: list[str]) -> None:
         f"with quantity {inventory[least_item]}"
     )
 
-    update_inventory(inventory, ["magic_item:1"])
+    update_inventory(inventory, "magic_item:1")
 
 
 if __name__ == "__main__":
