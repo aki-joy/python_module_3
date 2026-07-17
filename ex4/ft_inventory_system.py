@@ -41,7 +41,7 @@ def make_dict(args: list[str]) -> dict[str, int]:
 
 def update_inventory(
         inventory: dict[str, int],
-        added_item: list[str]
+        added_item: str
         ) -> None:
 
     parts = added_item.split(":")
@@ -65,11 +65,14 @@ def inventory_system(args: list[str]) -> None:
     print(f"Total quantity of the {len(values)} items: {total_quantity}")
 
     if len(keys) < 1:
-        update_inventory(inventory, ["magic_item:1"])
+        update_inventory(inventory, "magic_item:1")
         return
 
     for key in keys:
-        ratio = inventory[key] / total_quantity
+        if total_quantity == 0:
+            ratio = 0.0
+        else:
+            ratio = inventory[key] / total_quantity
         print(f"Item {key} represents {round(ratio * 100, 1)}%")
 
     most_item = keys[0]
